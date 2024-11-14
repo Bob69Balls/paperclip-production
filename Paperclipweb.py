@@ -1,3 +1,4 @@
+import os
 from flask import Flask, render_template, jsonify
 import threading
 
@@ -18,10 +19,10 @@ def increment():
         counter += 1
     return jsonify(counter=counter)
 
-@app.route('/get_count', methods=['GET'])
-def get_count():
-    global counter
-    return jsonify(counter=counter)
+@app.route('/')
+def home():
+    return "Hello, Render!"
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 10000))  # Use port 10000 or the port provided by Render
+    app.run(host="0.0.0.0", port=port)
