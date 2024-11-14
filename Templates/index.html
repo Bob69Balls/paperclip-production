@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paperclip Counter</title>
+    <script>
+        async function incrementCounter() {
+            const response = await fetch('/increment', { method: 'POST' });
+            const data = await response.json();
+            document.getElementById('counter').innerText = data.counter;
+        }
+
+        async function loadCounter() {
+            const response = await fetch('/get_count');
+            const data = await response.json();
+            document.getElementById('counter').innerText = data.counter;
+        }
+
+        window.onload = loadCounter;
+    </script>
+</head>
+<body>
+    <h1>Paperclips Produced: <span id="counter">0</span></h1>
+    <button onclick="incrementCounter()">Produce Paperclip</button>
+</body>
+</html>
